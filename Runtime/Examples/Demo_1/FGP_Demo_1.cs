@@ -86,19 +86,13 @@ namespace FrostweepGames.WebGLPUNVoice.Examples
         {
             if (status)
             {
-                if (CustomMicrophone.devices.Length == 0)
+                if (PhotonNetwork.NetworkClientState != Photon.Realtime.ClientState.Joined)
                 {
-                    recorder.RefreshMicrophones();
-                }
-                if (CustomMicrophone.devices.Length == 0)
-                {
-                    Debug.Log("Could not get microphone device.");
+                    muteMyClientToggle.isOn = false;
                     return;
                 }
-                else
-                {
-                    recorder.StartRecord();
-                }
+                RefreshMicrophonesButtonOnClickHandler();
+                recorder.StartRecord();
             }
             else
             {
